@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AleroSys — DriverWatch MSP Platform</title>
+  <meta name="description" content="DriverWatch by AleroSys monitors driver health across your entire device environment. Know which devices are outdated before they become a problem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-900: #0D1B3E;
+      --blue-700: #1A3A7C;
+      --blue-500: #2563EB;
+      --blue-400: #3B82F6;
+      --blue-100: #DBEAFE;
+      --gray-50:  #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-300: #D1D5DB;
+      --gray-500: #6B7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --white:    #FFFFFF;
+      --font-display: 'Sora', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--blue-900);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--white);
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--blue-900);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--blue-500); }
+
+    .nav-cta {
+      background: var(--blue-500);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      transition: background 0.15s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-700) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--gray-50);
+      text-align: center;
+      padding: 6rem 2rem 5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--blue-100);
+      color: var(--blue-700);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--gray-900);
+      max-width: 720px;
+      margin: 0 auto 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray-500);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--blue-500);
+      color: var(--white);
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--blue-700); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gray-700);
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid var(--gray-300);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: var(--blue-400); color: var(--blue-500); transform: translateY(-1px); }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 5rem 2rem;
+      background: var(--white);
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-500);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      color: var(--gray-900);
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 8px 24px rgba(37,99,235,0.08);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue-100);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--blue-500);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      line-height: 1.55;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      background: var(--blue-900);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .how-it-works .section-label { color: var(--blue-400); }
+
+    .how-it-works .section-title { color: var(--white); margin-bottom: 1rem; }
+
+    .coming-soon-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      color: var(--blue-100);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      margin-top: 1rem;
+    }
+
+    .how-it-works p {
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── TRIAL ── */
+    .trial {
+      padding: 5rem 2rem;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .trial-card {
+      max-width: 520px;
+      margin: 2rem auto 0;
+      background: var(--white);
+      border: 2px solid var(--blue-500);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+
+    .trial-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 1.25rem;
+    }
+
+    .trial-list {
+      list-style: none;
+      margin-bottom: 1.75rem;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .trial-list li {
+      font-size: 0.95rem;
+      color: var(--gray-700);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .trial-list li::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: var(--blue-100);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 11px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 5rem 2rem;
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 2rem auto 0;
+    }
+
+    .about-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+
+    .about-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--blue-500);
+      display: inline-block;
+    }
+
+    .about-card p {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 5rem 2rem;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 520px;
+      margin: 2rem auto 0;
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--gray-900);
+      background: var(--white);
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-500);
+    }
+
+    .form-group textarea {
+      height: 110px;
+      resize: vertical;
+    }
+
+    .contact-email {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      text-align: center;
+    }
+
+    .contact-email a {
+      color: var(--blue-500);
+      text-decoration: none;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .form-status.success {
+      background: #D1FAE5;
+      color: #065F46;
+      display: block;
+    }
+
+    .form-status.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      display: block;
+    }
+
+    /* ── CTA FOOTER BANNER ── */
+    .cta-banner {
+      background: var(--blue-900);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-banner p {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2rem;
+    }
+
+    .cta-banner .btn-primary {
+      background: var(--white);
+      color: var(--blue-900);
+    }
+
+    .cta-banner .btn-primary:hover {
+      background: var(--blue-100);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero { padding: 4rem 1.5rem 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">ALEROSYS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Product</a></li>
+      <li><a href="#contact">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <span class="hero-badge">30-day free trial</span>
+    <h1>Have a clear view of what devices are running outdated drivers in your environment</h1>
+    <p>DriverWatch by AleroSys monitors driver health across your entire device environment, so that your IT teams can take action on issues before they become greater issues.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Start free trial</a>
+      <a href="#how-it-works" class="btn-outline">See how it works</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <p class="section-label">Platform</p>
+    <h2 class="section-title">Everything you need to keep your fleet current</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+        </div>
+        <h3>Reference device compliance</h3>
+        <p>Compares every device against a known-good machine of the same model.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Real-time fleet dashboard</h3>
+        <p>See compliance across every org, model, and device at a glance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        </div>
+        <h3>Automated remediation</h3>
+        <p>Schedule driver updates for HP, Dell, and Lenovo with one click.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Built for MSPs</h3>
+        <p>Manage every client organization from a single, role-based dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how-it-works">
+    <p class="section-label">Demo</p>
+    <h2 class="section-title">See how it works</h2>
+    <p>Watch a walkthrough of DriverWatch in action — from agent deployment to compliance reporting.</p>
+    <span class="coming-soon-badge">Video coming soon</span>
+  </section>
+
+  <!-- TRIAL -->
+  <section class="trial" id="trial">
+    <p class="section-label">Get started</p>
+    <h2 class="section-title">Get started with a free trial</h2>
+    <p style="color: var(--gray-500); max-width: 480px; margin: 0 auto;">No commitments. No credit card required. Just reach out and we'll set you up.</p>
+    <div class="trial-card">
+      <h3>Contact Us for a Trial</h3>
+      <ul class="trial-list">
+        <li>30-day free trial — up to 30 devices</li>
+        <li>No credit card required</li>
+        <li>Dedicated onboarding support</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="width:100%; text-align:center; display:block;">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <p class="section-label">Company</p>
+    <h2 class="section-title">About AleroSys</h2>
+    <p style="text-align:center; color: var(--gray-500);">The team behind DriverWatch</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Our Mission</h3>
+        <p>We built DriverWatch because IT teams deserve better than reactive fire-fighting. Our platform gives MSPs and enterprise IT proactive visibility into driver health across every device in their fleet.</p>
+      </div>
+      <div class="about-card">
+        <h3>Who We Are</h3>
+        <p>AleroSys is a software company focused on endpoint management tooling. Founded by IT veterans, we ship practical solutions that save time and reduce risk in real-world environments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Contact Us</h2>
+    <p style="color: var(--gray-500);">Get in touch and we'll have you set up within 24 hours.</p>
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Company name" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message (optional)</label>
+          <textarea id="message" name="message" placeholder="Tell us about your environment..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+      <p class="contact-email">Or email us directly at <a href="mailto:info@alerosys.com">info@alerosys.com</a></p>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <h2>Stop finding out about driver problems the hard way</h2>
+    <p>Start your free trial today. Be up and running in minutes.</p>
+    <a href="#contact" class="btn-primary">Start free trial</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>AleroSys · DriverWatch MSP platform · by Alero Systems LLC</p>
+  </footer>
+
+  <script>
+    // Contact form — mailto fallback (no backend needed)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const company = document.getElementById('company').value;
+      const message = document.getElementById('message').value;
+      const status = document.getElementById('formStatus');
+
+      const subject = encodeURIComponent(`DriverWatch Trial Request — ${company}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message || 'No message provided.'}`
+      );
+
+      // Open mailto
+      window.location.href = `mailto:info@alerosys.com?subject=${subject}&body=${body}`;
+
+      status.className = 'form-status success';
+      status.textContent = 'Opening your email client... We\'ll get back to you within 24 hours.';
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
