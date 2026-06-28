@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -647,6 +648,7 @@
           <label for="message">Message (optional)</label>
           <textarea id="message" name="message" placeholder="Tell us about your environment..."></textarea>
         </div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADseF7q95a-5kdUc" style="margin-bottom: 1rem;"></div>
         <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
         <div class="form-status" id="formStatus"></div>
       </form>
@@ -667,25 +669,51 @@
   </footer>
 
   <script>
-    // Contact form — mailto fallback (no backend needed)
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // Contact form — submits to Azure Function with Turnstile CAPTCHA
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const company = document.getElementById('company').value;
       const message = document.getElementById('message').value;
       const status = document.getElementById('formStatus');
+      const submitBtn = this.querySelector('button[type="submit"]');
 
-      const subject = encodeURIComponent(`DriverWatch Trial Request — ${company}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message || 'No message provided.'}`
-      );
+      // Get Turnstile token
+      const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
 
-      // Open mailto
-      window.location.href = `mailto:info@alerosys.com?subject=${subject}&body=${body}`;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      status.className = 'form-status';
+      status.style.display = 'none';
 
-      status.className = 'form-status success';
-      status.textContent = 'Opening your email client... We\'ll get back to you within 24 hours.';
+      try {
+        const res = await fetch('https://alerosys-contact.azurewebsites.net/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name, email, company, message,
+            cf_turnstile_response: turnstileToken
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          status.className = 'form-status success';
+          status.textContent = 'Message sent! We\'ll get back to you within 24 hours.';
+          status.style.display = 'block';
+          this.reset();
+          if (window.turnstile) window.turnstile.reset();
+        } else {
+          throw new Error(data.error || 'Unknown error');
+        }
+      } catch (err) {
+        status.className = 'form-status error';
+        status.textContent = 'Something went wrong. Please email us directly at info@alerosys.com';
+        status.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
     });
 
     // Smooth scroll for nav links
