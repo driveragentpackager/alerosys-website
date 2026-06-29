@@ -59,28 +59,9 @@
       text-decoration: none;
     }
 
-    .nav-logo-icon {
-      width: 36px;
+    .nav-logo img {
       height: 36px;
-      background: var(--blue-900);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-logo-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--white);
-    }
-
-    .nav-logo-text {
-      font-family: var(--font-display);
-      font-size: 1.125rem;
-      font-weight: 800;
-      color: var(--blue-900);
-      letter-spacing: -0.01em;
+      width: auto;
     }
 
     .nav-links {
@@ -107,7 +88,59 @@
       transition: background 0.15s !important;
     }
 
-    .nav-cta:hover { background: var(--blue-700) !important; color: var(--white) !important; }
+    .nav-cta:hover { background: var(--blue-700) !important; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--blue-500);
+      color: var(--white);
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--blue-700); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gray-700);
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid var(--gray-300);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--blue-400); color: var(--blue-500); transform: translateY(-1px); }
+
+    /* ── SECTION HELPERS ── */
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-500);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      color: var(--gray-900);
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -142,7 +175,7 @@
     .hero p {
       font-size: 1.1rem;
       color: var(--gray-500);
-      max-width: 540px;
+      max-width: 560px;
       margin: 0 auto 2.5rem;
     }
 
@@ -153,62 +186,30 @@
       flex-wrap: wrap;
     }
 
-    .btn-primary {
-      background: var(--blue-500);
-      color: var(--white);
-      padding: 0.75rem 1.75rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      display: inline-block;
+    /* ── POSITIONING STRIP ── */
+    .positioning-strip {
+      background: var(--blue-900);
+      padding: 1.25rem 2rem;
+      text-align: center;
     }
 
-    .btn-primary:hover { background: var(--blue-700); transform: translateY(-1px); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--gray-700);
-      padding: 0.75rem 1.75rem;
-      border-radius: 10px;
-      font-weight: 600;
+    .positioning-strip p {
+      color: rgba(255,255,255,0.85);
       font-size: 0.95rem;
-      text-decoration: none;
-      border: 2px solid var(--gray-300);
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s, transform 0.1s;
-      display: inline-block;
+      max-width: 680px;
+      margin: 0 auto;
+      font-style: italic;
     }
 
-    .btn-outline:hover { border-color: var(--blue-400); color: var(--blue-500); transform: translateY(-1px); }
+    .positioning-strip strong {
+      color: #93C5FD;
+      font-style: normal;
+    }
 
     /* ── FEATURES ── */
     .features {
       padding: 5rem 2rem;
       background: var(--white);
-    }
-
-    .section-label {
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--blue-500);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.25rem);
-      font-weight: 800;
-      color: var(--gray-900);
-      text-align: center;
-      margin-bottom: 3rem;
-      letter-spacing: -0.02em;
     }
 
     .features-grid {
@@ -266,39 +267,194 @@
       line-height: 1.55;
     }
 
-    /* ── HOW IT WORKS ── */
-    .how-it-works {
+    /* ── WHO IT'S FOR ── */
+    .who {
+      background: var(--gray-50);
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .industry-card {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .industry-card:hover {
+      box-shadow: 0 8px 24px rgba(37,99,235,0.08);
+      transform: translateY(-2px);
+    }
+
+    .industry-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--blue-100);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.875rem;
+    }
+
+    .industry-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--blue-500);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .industry-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.4rem;
+    }
+
+    .industry-card p {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    /* ── OUTCOMES ── */
+    .outcomes {
+      padding: 5rem 2rem;
+      background: var(--white);
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .outcome-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .outcome-num {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--blue-100);
+      line-height: 1;
+      min-width: 36px;
+    }
+
+    .outcome-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.3rem;
+    }
+
+    .outcome-card p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    /* ── DIFFERENTIATOR ── */
+    .differentiator {
       background: var(--blue-900);
       padding: 5rem 2rem;
       text-align: center;
     }
 
-    .how-it-works .section-label { color: var(--blue-400); }
+    .differentiator .section-label { color: #93C5FD; }
 
-    .how-it-works .section-title { color: var(--white); margin-bottom: 1rem; }
+    .differentiator h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .differentiator p {
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      font-size: 1rem;
+    }
+
+    .diff-pills {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.875rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill-check {
+      width: 14px;
+      height: 14px;
+      stroke: #93C5FD;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      background: var(--gray-50);
+      padding: 5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--gray-100);
+    }
 
     .coming-soon-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.1);
-      color: var(--blue-100);
+      background: rgba(37,99,235,0.08);
+      color: var(--blue-700);
       font-size: 0.85rem;
       font-weight: 500;
       padding: 0.5rem 1.25rem;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid var(--blue-100);
       margin-top: 1rem;
-    }
-
-    .how-it-works p {
-      color: rgba(255,255,255,0.6);
-      max-width: 480px;
-      margin: 0 auto;
     }
 
     /* ── TRIAL ── */
     .trial {
       padding: 5rem 2rem;
-      background: var(--gray-50);
+      background: var(--white);
       text-align: center;
     }
 
@@ -339,12 +495,9 @@
       content: '';
       width: 18px;
       height: 18px;
+      flex-shrink: 0;
       background: var(--blue-100);
       border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
       background-size: 11px;
       background-repeat: no-repeat;
@@ -354,7 +507,8 @@
     /* ── ABOUT ── */
     .about {
       padding: 5rem 2rem;
-      background: var(--white);
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-100);
     }
 
     .about-grid {
@@ -366,7 +520,7 @@
     }
 
     .about-card {
-      background: var(--gray-50);
+      background: var(--white);
       border: 1px solid var(--gray-100);
       border-radius: 14px;
       padding: 2rem;
@@ -391,7 +545,7 @@
     /* ── CONTACT ── */
     .contact {
       padding: 5rem 2rem;
-      background: var(--gray-50);
+      background: var(--white);
       text-align: center;
     }
 
@@ -405,9 +559,7 @@
       text-align: left;
     }
 
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
+    .form-group { margin-bottom: 1.25rem; }
 
     .form-group label {
       display: block;
@@ -432,14 +584,9 @@
     }
 
     .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--blue-500);
-    }
+    .form-group textarea:focus { border-color: var(--blue-500); }
 
-    .form-group textarea {
-      height: 110px;
-      resize: vertical;
-    }
+    .form-group textarea { height: 110px; resize: vertical; }
 
     .contact-email {
       margin-top: 1.5rem;
@@ -448,10 +595,7 @@
       text-align: center;
     }
 
-    .contact-email a {
-      color: var(--blue-500);
-      text-decoration: none;
-    }
+    .contact-email a { color: var(--blue-500); text-decoration: none; }
 
     .form-status {
       display: none;
@@ -463,19 +607,10 @@
       text-align: center;
     }
 
-    .form-status.success {
-      background: #D1FAE5;
-      color: #065F46;
-      display: block;
-    }
+    .form-status.success { background: #D1FAE5; color: #065F46; display: block; }
+    .form-status.error { background: #FEE2E2; color: #991B1B; display: block; }
 
-    .form-status.error {
-      background: #FEE2E2;
-      color: #991B1B;
-      display: block;
-    }
-
-    /* ── CTA FOOTER BANNER ── */
+    /* ── CTA BANNER ── */
     .cta-banner {
       background: var(--blue-900);
       padding: 4rem 2rem;
@@ -491,19 +626,14 @@
       letter-spacing: -0.02em;
     }
 
-    .cta-banner p {
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 2rem;
-    }
+    .cta-banner p { color: rgba(255,255,255,0.6); margin-bottom: 2rem; }
 
     .cta-banner .btn-primary {
       background: var(--white);
       color: var(--blue-900);
     }
 
-    .cta-banner .btn-primary:hover {
-      background: var(--blue-100);
-    }
+    .cta-banner .btn-primary:hover { background: var(--blue-100); }
 
     /* ── FOOTER ── */
     footer {
@@ -527,7 +657,7 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <img src="logo.png" alt="AleroSys" style="height: 36px; width: auto;" />
+      <img src="logo.png" alt="AleroSys" />
     </a>
     <ul class="nav-links">
       <li><a href="#features">Product</a></li>
@@ -540,13 +670,18 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <span class="hero-badge">30-day free trial</span>
-    <h1>Have a clear view of what devices are running outdated drivers in your environment</h1>
-    <p>DriverWatch by AleroSys monitors driver health across your entire device environment, so that your IT teams can take action on issues before they become greater issues.</p>
+    <h1>Driver intelligence for Windows environments</h1>
+    <p>Automatically discover, monitor, compare, and remediate driver differences across every Windows endpoint — before they become incidents.</p>
     <div class="hero-buttons">
       <a href="#contact" class="btn-primary">Start free trial</a>
       <a href="#how-it-works" class="btn-outline">See how it works</a>
     </div>
   </section>
+
+  <!-- POSITIONING STRIP -->
+  <div class="positioning-strip">
+    <p>DriverWatch is the <strong>control plane for driver health, governance, visibility, and workflow</strong> — not another driver updater.</p>
+  </div>
 
   <!-- FEATURES -->
   <section class="features" id="features">
@@ -584,11 +719,118 @@
     </div>
   </section>
 
+  <!-- WHO IT'S FOR -->
+  <section class="who" id="who">
+    <p class="section-label">Who it's for</p>
+    <h2 class="section-title">Built for teams managing Windows fleets</h2>
+    <div class="industries-grid">
+      <div class="industry-card">
+        <div class="industry-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h4>MSPs</h4>
+        <p>Multi-tenant dashboard for all clients</p>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <h4>Manufacturing</h4>
+        <p>Driver stability for production systems</p>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h4>Healthcare</h4>
+        <p>Compliance across regulated endpoints</p>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4>Financial services</h4>
+        <p>Governance and audit reporting</p>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h4>Education</h4>
+        <p>Fleet visibility at scale</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS OUTCOMES -->
+  <section class="outcomes" id="outcomes">
+    <p class="section-label">Business outcomes</p>
+    <h2 class="section-title">What you get with DriverWatch</h2>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">01</div>
+        <div>
+          <h4>Driver standardization</h4>
+          <p>Enforce approved baselines across every device model in your fleet.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">02</div>
+        <div>
+          <h4>Faster troubleshooting</h4>
+          <p>Identify driver drift instantly instead of chasing symptoms manually.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">03</div>
+        <div>
+          <h4>Reduced operational risk</h4>
+          <p>Catch outdated drivers before they cause failures or incidents.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">04</div>
+        <div>
+          <h4>Compliance reporting</h4>
+          <p>Export driver status reports for audits and governance reviews.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">05</div>
+        <div>
+          <h4>Replaces scripts and spreadsheets</h4>
+          <p>One platform replaces fragmented manual tracking workflows.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">06</div>
+        <div>
+          <h4>Multi-tenant visibility</h4>
+          <p>Manage all client environments from a single pane of glass.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATOR -->
+  <section class="differentiator" id="why">
+    <p class="section-label">Why DriverWatch</p>
+    <h2>Not another driver updater</h2>
+    <p>Most tools push updates blindly. DriverWatch establishes approved baselines, detects drift, tracks compliance, and initiates remediation through your existing tools.</p>
+    <div class="diff-pills">
+      <span class="pill"><svg class="pill-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Baseline governance</span>
+      <span class="pill"><svg class="pill-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Driver drift detection</span>
+      <span class="pill"><svg class="pill-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compliance tracking</span>
+      <span class="pill"><svg class="pill-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Workflow integration</span>
+      <span class="pill"><svg class="pill-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multi-tenant MSP</span>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="how-it-works" id="how-it-works">
     <p class="section-label">Demo</p>
     <h2 class="section-title">See how it works</h2>
-    <p>Watch a walkthrough of DriverWatch in action — from agent deployment to compliance reporting.</p>
+    <p style="color: var(--gray-500); max-width: 480px; margin: 0 auto;">Watch a walkthrough of DriverWatch in action — from agent deployment to compliance reporting.</p>
     <span class="coming-soon-badge">Video coming soon</span>
   </section>
 
@@ -598,13 +840,13 @@
     <h2 class="section-title">Get started with a free trial</h2>
     <p style="color: var(--gray-500); max-width: 480px; margin: 0 auto;">No commitments. No credit card required. Just reach out and we'll set you up.</p>
     <div class="trial-card">
-      <h3>Contact Us for a Trial</h3>
+      <h3>Contact us for a trial</h3>
       <ul class="trial-list">
         <li>30-day free trial — up to 30 devices</li>
         <li>No credit card required</li>
         <li>Dedicated onboarding support</li>
       </ul>
-      <a href="#contact" class="btn-primary" style="width:100%; text-align:center; display:block;">Contact Us</a>
+      <a href="#contact" class="btn-primary" style="width:100%; text-align:center; display:block;">Contact us</a>
     </div>
   </section>
 
@@ -669,7 +911,6 @@
   </footer>
 
   <script>
-    // Contact form — submits to Azure Function with Turnstile CAPTCHA
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
@@ -678,8 +919,6 @@
       const message = document.getElementById('message').value;
       const status = document.getElementById('formStatus');
       const submitBtn = this.querySelector('button[type="submit"]');
-
-      // Get Turnstile token
       const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
 
       submitBtn.disabled = true;
@@ -691,15 +930,12 @@
         const res = await fetch('https://alerosys-contact.azurewebsites.net/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name, email, company, message,
-            cf_turnstile_response: turnstileToken
-          })
+          body: JSON.stringify({ name, email, company, message, cf_turnstile_response: turnstileToken })
         });
         const data = await res.json();
         if (data.success) {
           status.className = 'form-status success';
-          status.textContent = 'Message sent! We\'ll get back to you within 24 hours.';
+          status.textContent = "Message sent! We'll get back to you within 24 hours.";
           status.style.display = 'block';
           this.reset();
           if (window.turnstile) window.turnstile.reset();
@@ -716,7 +952,6 @@
       }
     });
 
-    // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const target = document.querySelector(this.getAttribute('href'));
